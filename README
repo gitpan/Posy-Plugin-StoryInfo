@@ -1,0 +1,168 @@
+
+==== NAME ====
+
+Posy::Plugin::StoryInfo - Posy plugin which gets suplementary information
+about stories from the story-entry itself.
+
+
+==== VERSION ====
+
+This describes version ``0.02'' of Posy::Plugin::StoryInfo.
+
+
+==== DESCRIPTION ====
+
+This plugin is an augmentation and specialization of Posy::Plugin::Info in
+that it extracts specialized Info data from the entry itself. This expects
+that the entry is a story, and therefore has a Title and an Author (and
+possibly a Summary and an AuthorEmail). Since stories often tend have some
+conventions in formatting this particular information, this plugin tries to
+guess that information from the story-entry itself, if the entry is HTML or
+plain text. This is only done, however, if the entry doesn't already have a
+.info file associated with it.
+
+This expects Posy::Plugin::Info to also be installed.
+
+This plugin replaces the 'info' method.
+
+Note that this is not reccommended as a permanent setup, since .info files
+have been designed to be smaller and easier to parse, and extracting Info
+from entry-files will take longer than having the Info in .info files. It
+is, however, useful for extracting the initial information from the entry
+file, so it can then be put into an .info file.
+
+
+==   Configuration   ==
+
+This expects configuration settings in the $self->{config} hash, which, in
+the default Posy setup, can be defined in the main "config" file in the
+config directory.
+
+``story_info_on''
+If true, enable extraction of Info information from entries. (default:
+false)
+
+``story_info_title_name''
+The name of the Info field into which to put the Title information.
+(default: Title) Make it empty to not use this field.
+
+``story_info_author_firstname''
+The name of the Info field into which to put the author's first-name
+information is put. (default: Firstname) Make it empty to not use this
+field.
+
+``story_info_author_lastname''
+The name of the Info field into which to put the author's last-name
+information is put. (default: Lastname) Make it empty to not use this field.
+
+``story_info_author_email''
+The name of the Info field into which to put the author's email information
+is put. (default: AuthorEmail) Make it empty to not use this field.
+
+``story_info_size_name''
+The name of the Info field into which to put the Size information (number of
+K) (default: Size) Make it empty to not use this field.
+
+``story_info_fields''
+Define additional fields to look for. The first part of the definition is
+the name of the Info field, and the second part is the string to look for
+which will contain the required information after it.
+
+    story_info_fields:
+      Summary: 'Summary:'
+      Category: 'Category:'
+      Rating: 'Rating:'
+
+This is really rather limited, but it does work with common formats.
+
+
+==== INSTALLATION ====
+
+Installation needs will vary depending on the particular setup a person has.
+
+
+==   Administrator, Automatic   ==
+
+If you are the administrator of the system, then the dead simple method of
+installing the modules is to use the CPAN or CPANPLUS system.
+
+    cpanp -i Posy::Plugin::StoryInfo
+
+This will install this plugin in the usual places where modules get
+installed when one is using CPAN(PLUS).
+
+
+==   Administrator, By Hand   ==
+
+If you are the administrator of the system, but don't wish to use the
+CPAN(PLUS) method, then this is for you. Take the *.tar.gz file and untar it
+in a suitable directory.
+
+To install this module, run the following commands:
+
+    perl Build.PL
+    ./Build
+    ./Build test
+    ./Build install
+
+Or, if you're on a platform (like DOS or Windows) that doesn't like the "./"
+notation, you can do this:
+
+   perl Build.PL
+   perl Build
+   perl Build test
+   perl Build install
+
+
+==   User With Shell Access   ==
+
+If you are a user on a system, and don't have root/administrator access, you
+need to install Posy somewhere other than the default place (since you don't
+have access to it). However, if you have shell access to the system, then
+you can install it in your home directory.
+
+Say your home directory is "/home/fred", and you want to install the modules
+into a subdirectory called "perl".
+
+Download the *.tar.gz file and untar it in a suitable directory.
+
+    perl Build.PL --install_base /home/fred/perl
+    ./Build
+    ./Build test
+    ./Build install
+
+This will install the files underneath /home/fred/perl.
+
+You will then need to make sure that you alter the PERL5LIB variable to find
+the modules.
+
+Therefore you will need to change the PERL5LIB variable to add
+/home/fred/perl/lib
+
+        PERL5LIB=/home/fred/perl/lib:${PERL5LIB}
+
+
+==== REQUIRES ====
+
+    Posy
+    Posy::Core
+    Posy::Plugin::Info
+    HTML::SimpleParse
+
+    Test::More
+
+
+==== AUTHOR ====
+
+    Kathryn Andersen (RUBYKAT)
+    perlkat AT katspace dot com
+    http://www.katspace.com
+
+
+==== COPYRIGHT AND LICENCE ====
+
+Copyright (c) 2005 by Kathryn Andersen
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+

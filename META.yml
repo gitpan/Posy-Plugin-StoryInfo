@@ -1,0 +1,20 @@
+--- #YAML:1.0
+name: Posy-Plugin-StoryInfo
+version: 0.02
+author:
+  - Kathryn Andersen
+abstract: ! >-
+  Posy plugin which gets suplementary information about stories from the
+  story-entry itself.
+license: perl
+requires:
+  HTML::SimpleParse: 0.12
+  Posy: 0.95
+  Posy::Plugin::Info: 0.0101
+build_requires:
+  Test::More: 0
+provides:
+  Posy::Plugin::StoryInfo:
+    file: lib/Posy/Plugin/StoryInfo.pm
+    version: 0.02
+generated_by: Module::Build version 0.261
